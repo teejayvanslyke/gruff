@@ -41,8 +41,8 @@ class Gruff::SideStackedBar < Gruff::SideBar
     	  ## part of the bart chart we wish to stack.
     	  temp1 = @graph_left + (@graph_width -
                                     data_point * @graph_width - 
-                                    height[point_index]) + 1
-    	  temp2 = @graph_left + @graph_width - height[point_index] - 1
+                                    height[point_index]) 
+    	  temp2 = @graph_left + @graph_width - height[point_index] 
     	  difference = temp2 - temp1
 
     	  left_x = length[point_index] #+ 1
