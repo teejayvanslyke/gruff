@@ -73,6 +73,40 @@ class TestGruffSideStackedBar < GruffTestCase
     g.write "test/output/side_stacked_bar_long_label.png"
   end
 
+  def test_unsorted_order
+    g = Gruff::SideStackedBar.new
+    g.title = "The order should be the same"
+    g.labels = {
+      0 => 'September', 
+      1 => 'Oct', 
+      2 => 'Nov', 
+      3 => 'Dec', 
+    }
+    @datasets.each do |data|
+      g.data(data[0], data[1])
+    end
+    g.sort = false
+    g.write "test/output/side_stacked_bar_unsorted_order.png"
+    g
+  end
+
+  def test_sorted_order
+    g = Gruff::SideStackedBar.new
+    g.title = "The order should be the same"
+    g.labels = {
+      0 => 'September', 
+      1 => 'Oct', 
+      2 => 'Nov', 
+      3 => 'Dec', 
+    }
+    @datasets.each do |data|
+      g.data(data[0], data[1])
+    end
+    g.sort = true 
+    g.write "test/output/side_stacked_bar_sorted_order.png"
+    g
+  end
+
 protected
 
   def setup_basic_graph(size=800)

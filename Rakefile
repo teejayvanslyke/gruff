@@ -4,7 +4,7 @@ $:.unshift(File.dirname(__FILE__) + "/lib")
 require 'gruff'
 
 Hoe.new('Gruff', Gruff::VERSION) do |p|
-  p.name = "gruff"
+  p.name = "teejayvanslyke-gruff"
   p.author = "Geoffrey Grosenbach"
   p.description = "Beautiful graphs for one or multiple datasets. Can be used on websites or in documents."
   p.email = 'boss@topfunky.com'

@@ -251,6 +251,11 @@ module Gruff
       @top_margin = @left_margin = @right_margin = @bottom_margin = margin
     end
 
+    # Sets whether we sort the data by the largest set first.
+    def sort=(sort)
+      @sort = sort
+    end
+
     # Sets the font for graph text to the font at +font_path+.
     def font=(font_path)
       @font = font_path
