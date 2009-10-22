@@ -903,8 +903,8 @@ module Gruff
       @d.fill = @font_color
       @d.font = @font if @font
       @d.pointsize = scale_fontsize(@marker_font_size)
-      @d.font_weight = BoldWeight
-      @d.stroke = 'black'
+      @d.font_weight = NormalWeight
+      @d.stroke = 'white'
       #@d.pointsize = scale_fontsize(@marker_font_size)
       @d.gravity = CenterGravity
       @d = @d.annotate_scaled(@base_image,
