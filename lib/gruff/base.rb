@@ -31,9 +31,10 @@ module Gruff
     DEBUG = false
 
     # Used for navigating the array of data to plot
-    DATA_LABEL_INDEX = 0
-    DATA_VALUES_INDEX = 1
-    DATA_COLOR_INDEX = 2
+    DATA_LABEL_INDEX   = 0
+    DATA_VALUES_INDEX  = 1
+    DATA_COLOR_INDEX   = 2
+    DATA_OVERLAY_INDEX = 3
 
     # Space around text elements. Mostly used for vertical spacing
     LEGEND_MARGIN = TITLE_MARGIN = 20.0
@@ -459,10 +460,25 @@ module Gruff
     #
     # Example:
     #   data("Bart S.", [95, 45, 78, 89, 88, 76], '#ffcc00')
-    def data(name, data_points=[], color=nil)
-      data_points = Array(data_points) # make sure it's an array
-      @data << [name, data_points, (color || increment_color)]
-      # Set column count if this is larger than previous counts
+    #   data("Bart S.", [95, 45, 78], :overlay => ['95%', '45%', '78%'], :color => '#ffcc00')
+    def data(name, data_points=[], options_or_color=nil)
+
+      # Allow either a color argument or a hash of options in order to 
+      # support the original interface.
+      if options_or_color.is_a?(Hash)
+        options = options_or_color
+        color   = options[:color]
+      else
+        options = {}
+        color   = options_or_color
+      end
+
+      # Make sure it's an array.
+      data_points = Array(data_points) 
+
+      @data << [name, data_points, (color || increment_color), options[:overlay]]
+
+      # Set column count if this is larger than previous counts.
       @column_count = (data_points.length > @column_count) ? data_points.length : @column_count
 
       # Pre-normalize
@@ -560,7 +576,7 @@ module Gruff
               norm_data_points << ((data_point.to_f - @minimum_value.to_f ) / @spread)
             end
           end
-          @norm_data << [data_row[DATA_LABEL_INDEX], norm_data_points, data_row[DATA_COLOR_INDEX]]
+          @norm_data << [data_row[DATA_LABEL_INDEX], norm_data_points, data_row[DATA_COLOR_INDEX], data_row[DATA_OVERLAY_INDEX]]
         end
       end
     end
@@ -878,6 +894,24 @@ module Gruff
         @labels_seen[index] = 1
         debug { @d.line 0.0, y_offset, @raw_columns, y_offset }
       end
+    end
+
+    # Draw a centered text overlay atop a given rectangular 
+    # area of the graph.  This is used to superimpose text
+    # atop each chart region.
+    def draw_overlay(left_x, left_y, right_x, right_y, text)
+      puts "left_x: #{left_x}; left_y: #{left_y}; right_x: #{right_x}; right_y: #{right_y}"
+      @d.fill = @font_color
+      @d.font = @font if @font
+      @d.pointsize = scale_fontsize(@marker_font_size) * 1.5
+      @d.font_weight = BoldWeight
+      @d.stroke = 'black'
+      #@d.pointsize = scale_fontsize(@marker_font_size)
+      @d.gravity = CenterGravity
+      @d = @d.annotate_scaled(@base_image,
+                              right_x - left_x, right_y - left_y,
+                              left_x, left_y,
+                              text, @scale)
     end
 
     # Shows an error message because you have no data.

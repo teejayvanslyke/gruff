@@ -58,10 +58,36 @@ class Gruff::SideStackedBar < Gruff::SideBar
         label_center = @graph_top + (@bar_width * point_index) + (@bar_width * @bar_spacing / 2.0)
         draw_label(label_center, point_index)
       end
-
     end
 
-    @d.draw(@base_image)    
+    @d.draw(@base_image)
+
+    height = Array.new(@column_count, 0)
+    length = Array.new(@column_count, @graph_left)
+
+    @norm_data.each_with_index do |data_row, row_index|
+      data_row[DATA_VALUES_INDEX].each_with_index do |data_point, point_index|
+    	  ## using the original calcs from the stacked bar chart to get the difference between
+    	  ## part of the bart chart we wish to stack.
+    	  temp1 = @graph_left + (@graph_width -
+                                    data_point * @graph_width - 
+                                    height[point_index]) 
+    	  temp2 = @graph_left + @graph_width - height[point_index] 
+    	  difference = temp2 - temp1
+
+    	  left_x = length[point_index] #+ 1
+              left_y = @graph_top + (@bar_width * point_index) + padding
+    	  right_x = left_x + difference
+              right_y = left_y + @bar_width * @bar_spacing
+    	  length[point_index] += difference
+        height[point_index] += (data_point * @graph_width - 2)
+
+        p data_row
+        overlay = data_row[DATA_OVERLAY_INDEX]
+
+        draw_overlay(left_x, left_y, right_x, right_y, overlay.to_s) if overlay
+      end
+    end
   end
 
   protected
