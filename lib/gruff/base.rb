@@ -900,7 +900,6 @@ module Gruff
     # area of the graph.  This is used to superimpose text
     # atop each chart region.
     def draw_overlay(left_x, left_y, right_x, right_y, text)
-      puts "left_x: #{left_x}; left_y: #{left_y}; right_x: #{right_x}; right_y: #{right_y}"
       @d.fill = @font_color
       @d.font = @font if @font
       @d.pointsize = scale_fontsize(@marker_font_size) * 1.5
