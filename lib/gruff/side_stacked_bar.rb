@@ -83,7 +83,7 @@ class Gruff::SideStackedBar < Gruff::SideBar
         height[point_index] += (data_point * @graph_width - 2)
 
         p data_row
-        overlay = data_row[DATA_OVERLAY_INDEX]
+        overlay = data_row[DATA_OVERLAY_INDEX][point_index]
 
         draw_overlay(left_x, left_y, right_x, right_y, overlay.to_s) if overlay
       end

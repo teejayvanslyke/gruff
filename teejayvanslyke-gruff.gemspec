@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{teejayvanslyke-gruff}
-  s.version = "0.3.8"
+  s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Geoffrey Grosenbach", "T.J. VanSlyke"]
-  s.date = %q{2009-10-13}
+  s.date = %q{2009-10-22}
   s.description = %q{Beautiful graphs for one or multiple datasets. Can be used on websites or in documents.}
   s.email = %q{teejay.vanslyke@gmail.com}
   s.extra_rdoc_files = [
@@ -98,6 +98,7 @@ Gem::Specification.new do |s|
      "test/test_side_bar.rb",
      "test/test_sidestacked_bar.rb",
      "test/test_sidestacked_bar_percentile.rb",
+     "test/test_sidestacked_bar_with_superimposed_labels.rb",
      "test/test_spider.rb",
      "test/test_stacked_area.rb",
      "test/test_stacked_bar.rb"
@@ -105,7 +106,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/teejayvanslyke/gruff.git}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.4}
+  s.rubygems_version = %q{1.3.5}
   s.summary = %q{Fork of Geoffrey Grosenbach's Gruff gem with some customizations and fixes}
   s.test_files = [
     "test/gruff_test_case.rb",
@@ -127,6 +128,7 @@ Gem::Specification.new do |s|
      "test/test_side_bar.rb",
      "test/test_sidestacked_bar.rb",
      "test/test_sidestacked_bar_percentile.rb",
+     "test/test_sidestacked_bar_with_superimposed_labels.rb",
      "test/test_spider.rb",
      "test/test_stacked_area.rb",
      "test/test_stacked_bar.rb"

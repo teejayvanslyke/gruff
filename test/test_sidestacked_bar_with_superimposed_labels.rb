@@ -22,7 +22,7 @@ class TestGruffSideStackedBarWithSuperimposedLabels < GruffTestCase
     g.title = "Stacked Bar With Superimposed Labels"
     g.labels = @sample_labels
     @datasets.each do |data|
-      g.data(data[0], data[1], :overlay => "testing 12345")
+      g.data(data[0], data[1], :overlay => data[1].map {|d| "#{d}%"})
     end
     g.write "test/output/side_stacked_with_superimposed_labels.png"
   end
