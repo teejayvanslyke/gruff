@@ -902,7 +902,7 @@ module Gruff
     def draw_overlay(left_x, left_y, right_x, right_y, text)
       @d.fill = @font_color
       @d.font = @font if @font
-      @d.pointsize = scale_fontsize(@marker_font_size) * 1.5
+      @d.pointsize = scale_fontsize(@marker_font_size)
       @d.font_weight = BoldWeight
       @d.stroke = 'black'
       #@d.pointsize = scale_fontsize(@marker_font_size)
